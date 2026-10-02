@@ -11,7 +11,7 @@ This project estimates the Value at Risk (VaR) and Expected Tail Loss (ETL) of a
 ```
 input/          # Place your .xlsx price data file here
 plots/          # Generated charts are saved here
-var_project.py  # Main script
+var_estimation.py  # Main script
 ```
 
 ## Methodologies
@@ -67,7 +67,7 @@ numpy
 matplotlib
 scipy
 openpyxl
-pathlib
+
 ```
 
 Install with:
