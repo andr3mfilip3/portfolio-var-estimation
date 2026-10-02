@@ -10,7 +10,7 @@
 # ------------------------------------------------------------
 
 weights = [0.25, 0.75]          # portfolio weights, must sum to 1
-betas = {"GameStop": -0.21, "NVIDIA": 1.75}  # update betas accordingly
+betas = {"GameStop": -0.21, "NVIDIA": 1.75}  # keys must match the Excel column names, in the same order
 parameter_lambda = 0.94
 alpha = 0.01
 risk_horizon = 1
@@ -27,12 +27,12 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from scipy.stats import norm
 
-folder = Path("insert_path\\portfolio-var-estimation\\input")
+folder = Path(__file__).parent / "input"
 files = list(folder.glob("*.xlsx")) #make sure to store your data as a .xlsx file, currently this code supports only one file at a time
 
 dataframes = {}
 if not files:
-    print(f"No files in directory {folder}")
+    raise SystemExit(f"No .xlsx files in directory {folder}")
 else:
     for file in files:
         dataframes[file.stem] = pd.read_excel(file)
@@ -62,7 +62,7 @@ df_raw = df.copy()
 df = df.iloc[1:]
 
 # PLOTTING
-plots = Path("insert_path\\portfolio-var-estimation\\plots")
+plots = Path(__file__).parent / "plots"
 
 # Stock Price Evolution
 price_columns = [col for col in columns if not col.endswith("_LogReturns") and not col.endswith("_INDEX") and col != columns[0]]
@@ -525,7 +525,7 @@ for column in columns:
     if column.endswith("_LogReturns"):
         base = column.replace("_LogReturns", "")
         stressed_skewness[base] = dfstress_period[f"{base}_LogReturns"].skew()
-        print(f"{base} Stressed Skewness: {stressed_skewness[base]:.4%}")
+        print(f"{base} Stressed Skewness: {stressed_skewness[base]:.4f}")
 
 stressed_kurtosis = {}
 for column in columns:

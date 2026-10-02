@@ -1,7 +1,8 @@
 This folder serves as path to store your data file.
 
-Please be aware that you're file must be one .xlsx file with one sheet.
-In this sheet paste the historical closing prices for your two stocks as well as the date of these prices.
-Name the columns with your stock names, tickers, etc. whatever you want really :)
+Please be aware that your file must be one .xlsx file with one sheet.
+In this sheet paste the historical closing prices for your two stocks and your market index, as well as the date of these prices.
+Name the stock columns with your stock names, tickers, etc. whatever you want really :)
+The market index column name must end with _INDEX (e.g. NASDAQ_INDEX).
 It should look something like this:
-Date | Stock name | Stock name
+Date | Stock name | Stock name | Stock Index_INDEX
