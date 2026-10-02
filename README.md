@@ -97,8 +97,6 @@ Example run on daily closing prices of GameStop, NVIDIA and the NASDAQ index fro
 
 ![EWMA volatilities](images/ewma_volatilities.png)
 
-![Portfolio log returns histogram](images/portfolio_histogram.png)
-
 ![Cumulative Distributions](images/cumulative_distributions.png)
 
 ## Dependencies
