@@ -11,6 +11,7 @@ This project estimates the Value at Risk (VaR) and Expected Tail Loss (ETL) of a
 ```
 input/          # Place your .xlsx price data file here
 plots/          # Generated charts are saved here
+images/         # Example charts shown in this README
 var_estimation.py  # Main script
 requirements.txt   # Python dependencies
 ```
@@ -59,6 +60,46 @@ The Excel file should contain:
 - EWMA volatilities over time
 - EWMA covariances over time
 - Cumulative return distributions
+
+## Results
+
+Example run on daily closing prices of GameStop, NVIDIA and the NASDAQ index from 20 May 2019 to 20 May 2024 (1,260 observations), using the default parameters: weights of 25% GameStop / 75% NVIDIA, 99% confidence (`alpha = 0.01`), `lambda = 0.94` and 2021 as the stress year.
+
+### VaR and ETL estimates
+
+| Method | Horizon | VaR | ETL |
+|---|---|---|---|
+| Parametric (EWMA) | 1-day | 13.66% | 15.65% |
+| Parametric (EWMA) | 10-day | 43.19% | 49.48% |
+| Parametric Systemic (stock betas) | 1-day | 9.15% | — |
+| Parametric Systemic (portfolio vs. NASDAQ) | 1-day | 19.21% | — |
+| Historical | 1-day | 8.35% | — |
+| Cornish-Fisher | 1-day | 10.99% | 15.77% |
+| Stressed Historical (2021) | 1-day | 9.97% | — |
+
+### Volatility and correlation
+
+| | GameStop | NVIDIA | Correlation |
+|---|---|---|---|
+| EWMA annual volatility | 325.56% | 47.24% | 0.128 |
+| Historical annual volatility | 138.70% | 51.53% | 0.154 |
+| Stressed period (2021) daily volatility | 14.75% | 2.81% | -0.070 |
+
+### Key observations
+
+- **The EWMA estimates are the highest because they weight recent data heavily.** GameStop's volatility spiked again at the end of the sample (May 2024), which pushes its EWMA annual volatility to 325%, more than double its full-sample historical volatility.
+- **The portfolio returns have fat tails.** Over the full sample, the portfolio's excess kurtosis is 4.23 (7.23 in 2021). As a result, both the historical VaR (8.35%) and the Cornish-Fisher VaR (10.99%) are above the 7.96% that a normal distribution with the same mean and volatility would give.
+- **GameStop's January 2021 short squeeze dominates the stress period.** That year, GameStop's daily volatility was over five times NVIDIA's, and the correlation between the two stocks turned slightly negative.
+
+### Charts
+
+![Log returns for stocks and portfolio](images/log_returns.png)
+
+![EWMA volatilities](images/ewma_volatilities.png)
+
+![Portfolio log returns histogram](images/portfolio_histogram.png)
+
+![Cumulative Distributions](images/cumulative_distributions.png)
 
 ## Dependencies
 
