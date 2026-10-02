@@ -4,7 +4,7 @@ A Python implementation of a multi-method Value at Risk framework for a two-asse
 
 ## Overview
 
-This project estimates the Value at Risk (VaR) and Expected Tail Loss (ETL) of a portfolio consisting of two stocks (GameStop and NVIDIA) using five distinct methodologies. It reads price data from an Excel file, performs all calculations programmatically, and exports charts to a plots folder.
+This project estimates the Value at Risk (VaR) and Expected Tail Loss (ETL) of a portfolio consisting of two stocks of your choosing using five distinct methodologies. It reads price data from an Excel file, performs all calculations programmatically, and exports charts to a plots folder.
 
 ## Project Structure
 
